@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bend Exact - Geometry Nodes Blender Addon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Video Overlay -->
+    <div class="video-overlay">
+        <video id="scroll-video" autoplay muted playsinline></video>
+    </div>
+
+    <!-- Main Content -->
+    <main class="content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="badge">Blender 4.2+ Geometry Nodes Addon</div>
+                <h1 class="hero-title">Bend Exact</h1>
+                <p class="hero-subtitle"> replicas of the popular "tut bend" Geometry Nodes bend setup. A precise, node-based bending system for Blender.</p>
+                <div class="hero-actions">
+                    <a href="#download" class="btn btn-primary">Download Now</a>
+                    <a href="#features" class="btn btn-secondary">View Features</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-num">1:1</span>
+                        <span class="stat-label">Exact Replica</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">4.2+</span>
+                        <span class="stat-label">Blender Support</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">GN</span>
+                        <span class="stat-label">Geometry Nodes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="section-header">
+                <h2 class="section-title">Why Bend Exact?</h2>
+                <p class="section-desc">A faithful reproduction of the "tut bend" Geometry Nodes setup, packaged as a clean Blender addon.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12h18M3 6h18M3 18h18"/>
+                        </svg>
+                    </div>
+                    <h3>Exact Node Replica</h3>
+                    <p>Every node, link, and parameter from the original "tut bend" setup is faithfully reproduced for identical results.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <h3>One-Click Setup</h3>
+                    <p>Install the addon, select your mesh, and hit the button. The Geometry Nodes modifier is applied instantly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                        </svg>
+                    </div>
+                    <h3>Custom Curve Control</h3>
+                    <p>Optionally specify an existing curve object, or let the addon auto-create one for your bend deformation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12a9 9 0 11-6.21-8.56"/>
+                        </svg>
+                    </div>
+                    <h3>Non-Destructive</h3>
+                    <p>Works entirely through Geometry Nodes modifiers. Your original mesh stays intact and fully editable.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Install Section -->
+        <section id="install" class="install">
+            <div class="section-header">
+                <h2 class="section-title">How to Install</h2>
+                <p class="section-desc">Get Bend Exact running in Blender in under a minute.</p>
+            </div>
+            <div class="install-steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h3>Download the Addon</h3>
+                        <p>Click the download button below to get the .zip file.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h3>Install in Blender</h3>
+                        <p>Go to Edit &gt; Preferences &gt; Add-ons &gt; Install. Select the downloaded .zip file.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h3>Enable &amp; Use</h3>
+                        <p>Search for "Bend Exact" in the Add-ons list, enable it, and press the button in the N-panel.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="download">
+            <div class="download-card">
+                <div class="download-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                </div>
+                <h2 class="download-title">Download Bend Exact</h2>
+                <p class="download-desc">Version 1.0.0 &middot; Compatible with Blender 4.2+</p>
+                <a href="download.zip" class="btn-download" download>
+                    <span>Download .zip</span>
+                    <span class="file-size">135 KB</span>
+                </a>
+                <div class="download-meta">
+                    <span>Free</span>
+                    <span class="dot">&middot;</span>
+                    <span>Open Source</span>
+                    <span class="dot">&middot;</span>
+                    <span>MIT License</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>What is this addon?</summary>
+                    <p>Bend Exact is a Blender addon that applies the exact "tut bend" Geometry Nodes setup to your mesh. It creates a precise bend deformation using curve sampling, rotation vectors, and position math.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Do I need to know Geometry Nodes?</summary>
+                    <p>No! The addon handles everything for you. Just install it, select your object, and press the button. The Geometry Nodes setup is applied automatically.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I customize the bend?</summary>
+                    <p>Yes. You can optionally provide an existing curve object to control the bend shape. The radius and range parameters are also adjustable through the Geometry Nodes group inputs.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Is it compatible with my Blender version?</summary>
+                    <p>Bend Exact requires Blender 4.2 or later. It uses the standard Geometry Nodes API and should work with any 4.2+ installation.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Bend Exact</h3>
+                    <p>Geometry Nodes Bend Addon for Blender</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#features">Features</a>
+                    <a href="#install">Install</a>
+                    <a href="#download">Download</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bend Exact. Made with Geometry Nodes.</p>
+            </div>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
