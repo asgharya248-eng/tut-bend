@@ -1,16 +1,22 @@
-// Scroll-driven alpha frame sequence
+// Scroll-driven alpha frame sequence + download gate
 const canvas = document.getElementById('fx-canvas');
 const ctx = canvas.getContext('2d');
+const overlay = canvas.parentElement;
 const loader = document.getElementById('loader');
 const loadpct = document.getElementById('loadpct');
+const holeDl = document.getElementById('holeDl');
 
 const FRAME_COUNT = 251;
 const FRAME_START = 130;
-const SCRINT_VIEWS = 3; // play the whole sequence over ~3 screen heights
+const SCRINT_VIEWS = 3;
+const HOLE_U = 0.71;
+const HOLE_V = 0.46;
+const DL_FILE = 'tut_bend_effect.zip';
 const frames = new Array(FRAME_COUNT);
 let loadedCount = 0;
 let lastFrame = -1;
 
+const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
 const nameFor = i => `frames/dfsfsfsf${String(FRAME_START + i).padStart(4, '0')}.webp`;
 
 function loadFrame(i) {
@@ -50,8 +56,6 @@ function resize() {
     lastFrame = -1;
 }
 
-const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
-
 function drawFrame(i) {
     const img = frames[i];
     if (!img) return;
@@ -61,22 +65,33 @@ function drawFrame(i) {
     ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
 }
 
+function placeHoleBtn() {
+    const cw = overlay.clientWidth, ch = overlay.clientHeight;
+    const s = Math.max(cw / 1280, ch / 720);
+    const w = 1280 * s, h = 720 * s;
+    const x = (cw - w) / 2 + HOLE_U * w;
+    const y = (ch - h) / 2 + HOLE_V * h;
+    holeDl.style.left = x + 'px';
+    holeDl.style.top = y + 'px';
+}
+
 function updateSequence() {
     const total = innerHeight * SCRINT_VIEWS;
     const p = clamp(scrollY / total, 0, 1);
-    canvas.parentElement.style.opacity = clamp(1.15 - p * 2, 0, 1) || 0;
-    if (p >= 1) return;
 
-    let fi = Math.round(p * (FRAME_COUNT - 1));
+    holeDl.classList.toggle('visible', p > 0.8);
+    placeHoleBtn();
+
+    const fi = Math.round(p * (FRAME_COUNT - 1));
     if (fi === lastFrame) return;
+    let cur = fi;
     let guard = 0;
-    while (!frames[fi] && fi > 0 && guard++ < FRAME_COUNT) fi--;
-    if (!frames[fi]) {
-        fi = Math.round(p * (FRAME_COUNT - 1));
-        guard = 0;
-        while (!frames[fi] && fi < FRAME_COUNT - 1 && guard++ < FRAME_COUNT) fi++;
+    while (!frames[cur] && cur > 0 && guard++ < FRAME_COUNT) cur--;
+    if (!frames[cur]) {
+        cur = fi; guard = 0;
+        while (!frames[cur] && cur < FRAME_COUNT - 1 && guard++ < FRAME_COUNT) cur++;
     }
-    if (frames[fi]) { drawFrame(fi); lastFrame = fi; }
+    if (frames[cur]) { drawFrame(cur); lastFrame = cur; }
 }
 
 let rafId = null;
@@ -101,6 +116,50 @@ window.addEventListener('resize', () => { resize(); requestUpdate(); });
 resize();
 requestUpdate();
 preload();
+
+// ---------- download gate ----------
+const modal = document.getElementById('lockModal');
+const unlockBtn = document.getElementById('unlockBtn');
+const unlockedTag = document.getElementById('unlockedTag');
+const lockClose = document.getElementById('lockClose');
+const KEY = 'tutbend_unlocked';
+
+const isUnlocked = () => localStorage.getItem(KEY) === '1';
+
+function startDownload() {
+    const a = document.createElement('a');
+    a.href = DL_FILE;
+    a.download = DL_FILE;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+}
+
+document.addEventListener('click', e => {
+    const trigger = e.target.closest('[data-lock]');
+    if (!trigger) return;
+    if (isUnlocked()) return;
+    e.preventDefault();
+    modal.hidden = false;
+    unlockedTag.hidden = true;
+    document.body.style.overflow = 'hidden';
+});
+
+unlockBtn.addEventListener('click', () => {
+    localStorage.setItem(KEY, '1');
+    startDownload();
+    unlockBtn.textContent = 'فالو کردید ✓';
+    unlockBtn.disabled = true;
+    unlockedTag.hidden = false;
+    setTimeout(closeModal, 1600);
+});
+
+function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+}
+lockClose.addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bend Exact - Geometry Nodes Blender Addon</title>
+    <title>Tut Bend - Geometry Nodes Blender Addon</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -13,6 +13,10 @@
     <!-- Alpha frame sequence - floats above content, holes reveal it -->
     <div class="video-overlay">
         <canvas id="fx-canvas" width="1280" height="720"></canvas>
+        <a id="holeDl" class="hole-dl" href="tut_bend_effect.zip" download data-lock>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 21h16"/></svg>
+            <span>download tut bend</span>
+        </a>
     </div>
     <div class="loader" id="loader">بارگذاری فریم‌ها… <span id="loadpct">0%</span></div>
 
@@ -22,8 +26,8 @@
         <section class="hero">
             <div class="hero-content">
                 <div class="badge">Blender 4.2+ Geometry Nodes Addon</div>
-                <h1 class="hero-title">Bend Exact</h1>
-                <p class="hero-subtitle"> replicas of the popular "tut bend" Geometry Nodes bend setup. A precise, node-based bending system for Blender.</p>
+                <h1 class="hero-title">Tut Bend</h1>
+                <p class="hero-subtitle">The popular "tut bend" Geometry Nodes setup, packaged as a clean one-click Blender addon. A precise, node-based bending system.</p>
                 <div class="hero-actions">
                     <a href="#download" class="btn btn-primary">Download Now</a>
                     <a href="#features" class="btn btn-secondary">View Features</a>
@@ -48,7 +52,7 @@
         <!-- Features Section -->
         <section id="features" class="features">
             <div class="section-header">
-                <h2 class="section-title">Why Bend Exact?</h2>
+                <h2 class="section-title">Why Tut Bend?</h2>
                 <p class="section-desc">A faithful reproduction of the "tut bend" Geometry Nodes setup, packaged as a clean Blender addon.</p>
             </div>
             <div class="features-grid">
@@ -96,7 +100,7 @@
         <section id="install" class="install">
             <div class="section-header">
                 <h2 class="section-title">How to Install</h2>
-                <p class="section-desc">Get Bend Exact running in Blender in under a minute.</p>
+                <p class="section-desc">Get Tut Bend running in Blender in under a minute.</p>
             </div>
             <div class="install-steps">
                 <div class="step">
@@ -117,7 +121,7 @@
                     <div class="step-num">3</div>
                     <div class="step-content">
                         <h3>Enable &amp; Use</h3>
-                        <p>Search for "Bend Exact" in the Add-ons list, enable it, and press the button in the N-panel.</p>
+                        <p>Search for "Tut Bend" in the Add-ons list, enable it, and press the button in the N-panel.</p>
                     </div>
                 </div>
             </div>
@@ -133,9 +137,9 @@
                         <line x1="12" y1="15" x2="12" y2="3"/>
                     </svg>
                 </div>
-                <h2 class="download-title">Download Bend Exact</h2>
+                <h2 class="download-title">Download Tut Bend</h2>
                 <p class="download-desc">Version 1.0.0 &middot; Compatible with Blender 4.2+</p>
-                <a href="tut_bend_effect.zip" class="btn-download" download>
+                <a href="tut_bend_effect.zip" class="btn-download" download data-lock>
                     <span>Download tut_bend_effect.zip</span>
                     <span class="file-size">133 KB</span>
                 </a>
@@ -150,14 +154,14 @@
         </section>
 
         <!-- FAQ Section -->
-        <section class="faq">
+        <section id="faq" class="faq">
             <div class="section-header">
                 <h2 class="section-title">Frequently Asked Questions</h2>
             </div>
             <div class="faq-list">
                 <details class="faq-item">
                     <summary>What is this addon?</summary>
-                    <p>Bend Exact is a Blender addon that applies the exact "tut bend" Geometry Nodes setup to your mesh. It creates a precise bend deformation using curve sampling, rotation vectors, and position math.</p>
+                    <p>Tut Bend is a Blender addon that applies the exact "tut bend" Geometry Nodes setup to your mesh. It creates a precise bend deformation using curve sampling, rotation vectors, and position math.</p>
                 </details>
                 <details class="faq-item">
                     <summary>Do I need to know Geometry Nodes?</summary>
@@ -169,7 +173,7 @@
                 </details>
                 <details class="faq-item">
                     <summary>Is it compatible with my Blender version?</summary>
-                    <p>Bend Exact requires Blender 4.2 or later. It uses the standard Geometry Nodes API and should work with any 4.2+ installation.</p>
+                    <p>Tut Bend requires Blender 4.2 or later. It uses the standard Geometry Nodes API and should work with any 4.2+ installation.</p>
                 </details>
             </div>
         </section>
@@ -178,7 +182,7 @@
         <footer class="footer">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <h3>Bend Exact</h3>
+                    <h3>Tut Bend</h3>
                     <p>Geometry Nodes Bend Addon for Blender</p>
                 </div>
                 <div class="footer-links">
@@ -189,10 +193,31 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Bend Exact. Made with Geometry Nodes.</p>
+                <p>&copy; 2026 Tut Bend. Made with Geometry Nodes.</p>
             </div>
         </footer>
     </main>
+
+    <!-- Follow-to-unlock gate -->
+    <div class="lock-modal" id="lockModal" hidden>
+        <div class="lock-panel">
+            <button class="lock-close" id="lockClose" aria-label="close">&times;</button>
+            <h3>قفل دانلود را باز کنید</h3>
+            <p class="lock-desc">برای دریافت افزونه <b>Tut Bend</b> اول کانال‌های زیر را فالو کنید، بعد برگردید و دکمه را بزنید.</p>
+            <div class="lock-links">
+                <a class="lock-link yt" href="https://www.youtube.com/@arsalanasghary-mg2uo" target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5s-.2-1.6-.9-2.3c-.8-.9-1.8-.9-2.2-1C16.7 4 12 4 12 4s-4.7 0-7.9.2c-.4.1-1.4.1-2.2 1-.7.7-.9 2.3-.9 2.3S.8 9.4.8 11.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.1 7.7.2 7.7.2s4.7 0 7.9-.3c.4-.1 1.4-.1 2.2-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.7-.2-3.7zM9.8 15.1V8.4l6.4 3.4-6.4 3.3z"/></svg>
+                    YouTube
+                </a>
+                <a class="lock-link ig" href="https://www.instagram.com/arsalanasghary8" target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+                    Instagram
+                </a>
+            </div>
+            <button class="btn-unlock" id="unlockBtn">فالو کردم — دانلود باز شد</button>
+            <p class="lock-unlocked" id="unlockedTag" hidden>✓ قفل باز شد — دانلود آغاز شد</p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

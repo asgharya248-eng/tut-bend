@@ -44,13 +44,43 @@ body {
     z-index: 40;
     pointer-events: none;
     overflow: hidden;
-    transition: opacity 0.6s ease;
 }
 
 .video-overlay canvas {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* download button that lives inside the tear of the last frame */
+.hole-dl {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: clamp(140px, 15vw, 210px);
+    padding: 0.85rem 0.5rem;
+    background: var(--accent);
+    color: #062e26;
+    font-weight: 700;
+    font-size: clamp(0.72rem, 1.1vw, 0.95rem);
+    text-decoration: none;
+    border-radius: 9999px;
+    box-shadow: 0 10px 40px rgba(0, 212, 170, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.2s ease, box-shadow 0.2s;
+    white-space: nowrap;
+}
+.hole-dl.visible { opacity: 1; pointer-events: auto; animation: holePop 0.5s ease-out; }
+.hole-dl:hover { transform: translate(-50%, -50%) scale(1.07); box-shadow: 0 14px 50px rgba(0, 212, 170, 0.7); }
+.hole-dl svg { flex-shrink: 0; }
+@keyframes holePop {
+    0% { transform: translate(-50%, -50%) scale(0.4); }
+    70% { transform: translate(-50%, -50%) scale(1.12); }
+    100% { transform: translate(-50%, -50%) scale(1); }
 }
 
 .loader {
@@ -68,6 +98,108 @@ body {
     transition: opacity 0.5s;
 }
 .loader.hidden { opacity: 0; pointer-events: none; }
+
+/* ---------- download lock modal ---------- */
+.lock-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: grid;
+    place-items: center;
+    background: rgba(4, 4, 8, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1.25rem;
+}
+.lock-modal[hidden] { display: none; }
+
+.lock-panel {
+    position: relative;
+    width: min(460px, 100%);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    animation: panelIn 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+@keyframes panelIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.lock-close {
+    position: absolute;
+    top: 0.9rem;
+    left: 1.1rem;
+    background: none;
+    border: none;
+    color: var(--fg-muted);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.lock-close:hover { color: var(--fg); }
+
+.lock-panel h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+}
+.lock-desc {
+    color: var(--fg-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+.lock-desc b { color: var(--accent); }
+
+.lock-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.4rem;
+}
+.lock-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.15s, filter 0.15s;
+}
+.lock-link:hover { transform: translateY(-2px); filter: brightness(1.15); }
+.lock-link.yt { background: #e5291f; }
+.lock-link.ig { background: linear-gradient(45deg, #f9ce34, #ee2a7b 55%, #6228d7); }
+
+.btn-unlock {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 9999px;
+    background: var(--accent);
+    color: #062e26;
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+    box-shadow: 0 8px 30px var(--accent-dim);
+}
+.btn-unlock:hover { transform: translateY(-2px); }
+.btn-unlock:disabled { opacity: 0.65; cursor: default; transform: none; }
+
+.lock-unlocked {
+    margin-top: 1rem;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
 
 /* Main Content - sits BELOW the sequence overlay */
 .content {
@@ -591,6 +723,7 @@ body {
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .video-overlay canvas { display: none; }
+    .hole-dl { display: none; }
     .scroll-indicator { display: none; }
     .hero-content { animation: none; }
     .feature-card, .step, .faq-item { transition: none; }
