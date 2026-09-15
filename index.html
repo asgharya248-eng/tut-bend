@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Video Overlay -->
+    <!-- Alpha frame sequence - floats above content, holes reveal it -->
     <div class="video-overlay">
-        <video id="scroll-video" autoplay muted playsinline></video>
+        <canvas id="fx-canvas" width="1280" height="720"></canvas>
     </div>
+    <div class="loader" id="loader">بارگذاری فریم‌ها… <span id="loadpct">0%</span></div>
 
     <!-- Main Content -->
     <main class="content">
@@ -134,9 +135,9 @@
                 </div>
                 <h2 class="download-title">Download Bend Exact</h2>
                 <p class="download-desc">Version 1.0.0 &middot; Compatible with Blender 4.2+</p>
-                <a href="download.zip" class="btn-download" download>
-                    <span>Download .zip</span>
-                    <span class="file-size">135 KB</span>
+                <a href="tut_bend_effect.zip" class="btn-download" download>
+                    <span>Download tut_bend_effect.zip</span>
+                    <span class="file-size">133 KB</span>
                 </a>
                 <div class="download-meta">
                     <span>Free</span>
