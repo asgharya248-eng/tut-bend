@@ -12,6 +12,7 @@ const SCRINT_VIEWS = 3;
 const HOLE_U = 0.71;
 const HOLE_V = 0.46;
 const DL_FILE = 'tut_bend_effect.zip';
+const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const frames = new Array(FRAME_COUNT);
 let loadedCount = 0;
 let lastFrame = -1;
@@ -60,14 +61,18 @@ function drawFrame(i) {
     const img = frames[i];
     if (!img) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+    const wide = canvas.width / canvas.height >= img.width / img.height;
+    const sx = canvas.width / img.width, sy = canvas.height / img.height;
+    const scale = wide ? Math.max(sx, sy) : Math.min(sx, sy);
     const w = img.width * scale, h = img.height * scale;
     ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
 }
 
 function placeHoleBtn() {
+    if (REDUCED_MOTION) return;
     const cw = overlay.clientWidth, ch = overlay.clientHeight;
-    const s = Math.max(cw / 1280, ch / 720);
+    const wide = cw / ch >= 1280 / 720;
+    const s = wide ? Math.max(cw / 1280, ch / 720) : Math.min(cw / 1280, ch / 720);
     const w = 1280 * s, h = 720 * s;
     const x = (cw - w) / 2 + HOLE_U * w;
     const y = (ch - h) / 2 + HOLE_V * h;
@@ -79,8 +84,8 @@ function updateSequence() {
     const total = innerHeight * SCRINT_VIEWS;
     const p = clamp(scrollY / total, 0, 1);
 
-    holeDl.classList.toggle('visible', p > 0.8);
     placeHoleBtn();
+    holeDl.style.pointerEvents = (REDUCED_MOTION || p > 0.55) ? 'auto' : 'none';
 
     const fi = Math.round(p * (FRAME_COUNT - 1));
     if (fi === lastFrame) return;
@@ -148,7 +153,7 @@ document.addEventListener('click', e => {
 unlockBtn.addEventListener('click', () => {
     localStorage.setItem(KEY, '1');
     startDownload();
-    unlockBtn.textContent = 'فالو کردید ✓';
+    unlockBtn.textContent = 'Followed \u2713';
     unlockBtn.disabled = true;
     unlockedTag.hidden = false;
     setTimeout(closeModal, 1600);

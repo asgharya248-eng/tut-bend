@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tut Bend - Geometry Nodes Blender Addon</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Alpha frame sequence - floats above content, holes reveal it -->
+    <!-- Alpha frame sequence - the TOP layer; its alpha holes reveal everything below -->
     <div class="video-overlay">
         <canvas id="fx-canvas" width="1280" height="720"></canvas>
-        <a id="holeDl" class="hole-dl" href="tut_bend_effect.zip" download data-lock>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 21h16"/></svg>
-            <span>download tut bend</span>
-        </a>
     </div>
-    <div class="loader" id="loader">بارگذاری فریم‌ها… <span id="loadpct">0%</span></div>
+    <div class="loader" id="loader">loading frames&hellip; <span id="loadpct">0%</span></div>
+
+    <!-- The one and only download button - BEHIND the video, always full opacity.
+         It is only visible when the alpha hole in the sequence opens over it. -->
+    <a id="holeDl" class="hole-dl" href="tut_bend_effect.zip" download data-lock>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 21h16"/></svg>
+        <span>download tut bend</span>
+    </a>
 
     <!-- Main Content -->
     <main class="content">
@@ -29,7 +32,7 @@
                 <h1 class="hero-title">Tut Bend</h1>
                 <p class="hero-subtitle">The popular "tut bend" Geometry Nodes setup, packaged as a clean one-click Blender addon. A precise, node-based bending system.</p>
                 <div class="hero-actions">
-                    <a href="#download" class="btn btn-primary">Download Now</a>
+                    <a href="#download" class="btn btn-primary">Get Started</a>
                     <a href="#features" class="btn btn-secondary">View Features</a>
                 </div>
                 <div class="hero-stats">
@@ -107,7 +110,7 @@
                     <div class="step-num">1</div>
                     <div class="step-content">
                         <h3>Download the Addon</h3>
-                        <p>Click the download button below to get the .zip file.</p>
+                        <p>Scroll through the sequence and press the button revealed inside the tear.</p>
                     </div>
                 </div>
                 <div class="step">
@@ -137,12 +140,9 @@
                         <line x1="12" y1="15" x2="12" y2="3"/>
                     </svg>
                 </div>
-                <h2 class="download-title">Download Tut Bend</h2>
+                <h2 class="download-title">Tut Bend</h2>
                 <p class="download-desc">Version 1.0.0 &middot; Compatible with Blender 4.2+</p>
-                <a href="tut_bend_effect.zip" class="btn-download" download data-lock>
-                    <span>Download tut_bend_effect.zip</span>
-                    <span class="file-size">133 KB</span>
-                </a>
+                <p class="download-hint">The download button lives inside the sequence itself &mdash; scroll back up and press it through the tear.</p>
                 <div class="download-meta">
                     <span>Free</span>
                     <span class="dot">&middot;</span>
@@ -202,8 +202,8 @@
     <div class="lock-modal" id="lockModal" hidden>
         <div class="lock-panel">
             <button class="lock-close" id="lockClose" aria-label="close">&times;</button>
-            <h3>قفل دانلود را باز کنید</h3>
-            <p class="lock-desc">برای دریافت افزونه <b>Tut Bend</b> اول کانال‌های زیر را فالو کنید، بعد برگردید و دکمه را بزنید.</p>
+            <h3>Unlock the download</h3>
+            <p class="lock-desc">To download <b>Tut Bend</b>, follow the channels below first &mdash; then come back and press the button.</p>
             <div class="lock-links">
                 <a class="lock-link yt" href="https://www.youtube.com/@arsalanasghary-mg2uo" target="_blank" rel="noopener">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5s-.2-1.6-.9-2.3c-.8-.9-1.8-.9-2.2-1C16.7 4 12 4 12 4s-4.7 0-7.9.2c-.4.1-1.4.1-2.2 1-.7.7-.9 2.3-.9 2.3S.8 9.4.8 11.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.1 7.7.2 7.7.2s4.7 0 7.9-.3c.4-.1 1.4-.1 2.2-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.7-.2-3.7zM9.8 15.1V8.4l6.4 3.4-6.4 3.3z"/></svg>
@@ -214,8 +214,8 @@
                     Instagram
                 </a>
             </div>
-            <button class="btn-unlock" id="unlockBtn">فالو کردم — دانلود باز شد</button>
-            <p class="lock-unlocked" id="unlockedTag" hidden>✓ قفل باز شد — دانلود آغاز شد</p>
+            <button class="btn-unlock" id="unlockBtn">I followed &mdash; unlock my download</button>
+            <p class="lock-unlocked" id="unlockedTag" hidden>&#10003; Unlocked &mdash; your download has started</p>
         </div>
     </div>
 
